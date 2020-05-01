@@ -13,7 +13,7 @@
 
 <script>
 import api from '@/shared/services/api/api.service';
-import { mapChannelResponse } from '@/pages/Search.page.service';
+import { mapChannelResponse } from '@/shared/services/mappers';
 import { formatNumber } from '@/shared/services/helpers';
 
 export default {

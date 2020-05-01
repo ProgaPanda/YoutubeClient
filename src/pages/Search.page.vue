@@ -16,8 +16,8 @@
 <script>
 import MediaCard from '@/components/MediaCard.component.vue';
 import api from '@/shared/services/api/api.service';
-import { formatNumber } from '../shared/services/helpers';
-import { getSearchParam, mapSearchResponse } from './Search.page.service';
+import { getSearchParam, mapSearchResponse } from '@/shared/services/mappers';
+import { formatNumber } from '@/shared/services/helpers';
 
 export default {
   beforeRouteUpdate(to, from, next) {
