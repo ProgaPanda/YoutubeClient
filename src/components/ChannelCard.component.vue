@@ -61,11 +61,6 @@ export default {
       font-weight: normal;
     }
 
-    &__meta {
-      color: #8b8b8b;
-      margin-bottom: 0.5em;
-    }
-
     &__description {
       color: #8b8b8b;
     }
