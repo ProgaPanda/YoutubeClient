@@ -20,8 +20,19 @@ export default {
         q: searchParam,
         maxResults,
         order,
-        type: 'video',
       },
     });
   },
+
+  /**
+   * Returns matching channel details for given channel ID from YT API
+   * @param {string} channelId
+   * @returns {Promise}
+   */
+  getChannelDetails: (channelId) =>
+    api.get(`channels?part=snippet,contentDetails,statistics&key=${process.env.VUE_APP_YT_KEY}`, {
+      params: {
+        id: channelId,
+      },
+    }),
 };
