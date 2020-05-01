@@ -28,6 +28,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #cccccc;
+  z-index: 1;
 
   &__logo {
     color: #000;
