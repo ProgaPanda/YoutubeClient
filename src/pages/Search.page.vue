@@ -15,29 +15,28 @@ import { mapSearchResponse } from './Search.page.service';
 export default {
   data() {
     return {
-      searchParam: this.$route.query.query,
       searchItems: [],
     };
   },
   methods: {
-    search() {
-      api.search(this.searchParam).then((res) => {
-        const mappedResponse = mapSearchResponse(res.data);
-        this.searchItems = mappedResponse.items;
+    search(searchParam) {
+      api.search(searchParam).then((res) => {
+        const { items } = mapSearchResponse(res.data);
+        this.searchItems = items;
       });
     },
   },
   beforeRouteUpdate(to, from, next) {
-    this.searchParam = to.query.query;
-    if (this.searchParam) {
-      this.search();
+    const searchParam = to.query.query;
+    if (searchParam) {
+      this.search(searchParam);
     }
     next();
   },
   mounted() {
-    this.searchParam = this.$route.query.query;
-    if (this.searchParam) {
-      this.search();
+    const searchParam = this.$route.query.query;
+    if (searchParam) {
+      this.search(searchParam);
     }
   },
 };

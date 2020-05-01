@@ -11,6 +11,7 @@ export default {
    * Returns matching items for the search parameter from YT API
    * @param {string} searchParam
    * @param {Object} searchOptions
+   * @returns {Promise}
    */
   search: (searchParam, searchOptions = {}) => {
     const { maxResults = 10, order = 'relevance' } = searchOptions;
