@@ -15,6 +15,6 @@ export const mapSearchResponse = (response) => ({
     id: item.id.videoId,
     channelTitle: item.snippet.channelTitle,
     title: item.snippet.title,
-    thumbnailURL: item.snippet.thumbnails.high.url,
+    thumbnailURL: item.snippet.thumbnails.medium.url,
   })),
 });
