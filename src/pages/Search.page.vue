@@ -1,43 +1,78 @@
 <template>
   <div>
-    <div v-for="(item, index) in searchItems" :key="index">
-      <h2>{{ item.title }}</h2>
-      <h3>{{ item.channelTitle }}</h3>
-      <img :src="item.thumbnailURL" alt="video-thumbnail" />
+    <h3 v-if="isLoading">Loading...</h3>
+    <h3 v-else-if="isEmpty">Nothing</h3>
+
+    <div v-for="{ id, title, channelTitle, thumbnailURL } in searchItems" :key="id">
+      <h2>{{ title }}</h2>
+      <h3>{{ channelTitle }}</h3>
+      <img :src="thumbnailURL" alt="video-thumbnail" />
     </div>
   </div>
 </template>
 
 <script>
 import api from '@/shared/services/api/api.service';
-import { mapSearchResponse } from './Search.page.service';
+import { getSearchParam, mapSearchResponse } from './Search.page.service';
 
 export default {
-  data() {
-    return {
-      searchItems: [],
-    };
-  },
-  methods: {
-    search(searchParam) {
-      api.search(searchParam).then((res) => {
-        const { items } = mapSearchResponse(res.data);
-        this.searchItems = items;
-      });
-    },
-  },
   beforeRouteUpdate(to, from, next) {
-    const searchParam = to.query.query;
+    const searchParam = getSearchParam(to);
     if (searchParam) {
       this.search(searchParam);
+    } else {
+      this.resetItems();
     }
     next();
   },
+
   mounted() {
-    const searchParam = this.$route.query.query;
+    const searchParam = getSearchParam(this.$route);
     if (searchParam) {
       this.search(searchParam);
+    } else {
+      this.resetItems();
     }
+  },
+
+  data() {
+    return {
+      searchItems: [],
+      isEmpty: true,
+      isLoading: false,
+    };
+  },
+
+  methods: {
+    search(searchParam) {
+      this.resetItems();
+      this.setLoading();
+      api.search(searchParam).then((res) => {
+        const { items } = mapSearchResponse(res.data);
+        if (items.length) {
+          this.setItems(items);
+        } else {
+          this.resetItems();
+        }
+        this.resetLoading();
+      });
+    },
+
+    // Helper functions
+    setItems(items) {
+      this.searchItems = items;
+      this.isEmpty = false;
+    },
+    resetItems() {
+      this.isEmpty = true;
+      this.searchItems = [];
+    },
+    setLoading() {
+      this.isLoading = true;
+    },
+    resetLoading() {
+      this.isLoading = false;
+    },
   },
 };
 </script>

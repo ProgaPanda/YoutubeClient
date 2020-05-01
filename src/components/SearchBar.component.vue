@@ -3,6 +3,7 @@
     <input
       class="search__input"
       type="search"
+      placeholder="Search"
       v-model="searchParam"
       @keydown="handleKeyDownEnter"
     />
@@ -27,7 +28,6 @@ export default {
       const searchParam = this.searchParam.trim();
       // Get last search param to avoid duplicate fetches
       const lastSearchParam = this.$route.query.query;
-
       if (searchParam && lastSearchParam !== searchParam) {
         this.$router.push({ path: 'search', query: { query: searchParam } });
       }

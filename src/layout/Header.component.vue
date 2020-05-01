@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <h3 class="header__logo">Youtube <span>client</span></h3>
+    <router-link to="/" class="header__logo">Youtube<span>client</span></router-link>
     <div class="header__search-container">
       <SearchBar />
     </div>
@@ -30,9 +30,12 @@ export default {
   border-bottom: 1px solid #cccccc;
 
   &__logo {
+    color: #000;
     text-transform: uppercase;
     font-weight: normal;
+    text-decoration: none;
     span {
+      color: #a33030;
       font-weight: bold;
     }
   }
