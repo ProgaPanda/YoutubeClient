@@ -3,10 +3,10 @@
     <input
       class="search__input"
       type="search"
-      v-model="searchValue"
+      v-model="searchParam"
       @keydown="handleKeyDownEnter"
     />
-    <button class="search__button" type="button" @click="search"><SearchIcon /></button>
+    <button class="search__button" type="button" @click="pushSearch"><SearchIcon /></button>
   </div>
 </template>
 
@@ -19,19 +19,22 @@ export default {
   },
   data() {
     return {
-      searchValue: '',
+      searchParam: '',
     };
   },
   methods: {
-    search() {
-      const searchValue = this.searchValue.trim();
-      if (searchValue) {
-        console.log(searchValue);
+    pushSearch() {
+      const searchParam = this.searchParam.trim();
+      // Get last search param to avoid duplicate fetches
+      const lastSearchParam = this.$route.query.query;
+
+      if (searchParam && lastSearchParam !== searchParam) {
+        this.$router.push({ path: 'search', query: { query: searchParam } });
       }
     },
     handleKeyDownEnter(event) {
       if (event.key === 'Enter') {
-        this.search();
+        this.pushSearch();
       }
     },
   },

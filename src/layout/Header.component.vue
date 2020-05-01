@@ -2,17 +2,17 @@
   <header class="header">
     <h3 class="header__logo">Youtube <span>client</span></h3>
     <div class="header__search-container">
-      <Search />
+      <SearchBar />
     </div>
   </header>
 </template>
 
 <script>
-import Search from '@/components/Search.component.vue';
+import SearchBar from '@/components/SearchBar.component.vue';
 
 export default {
   components: {
-    Search,
+    SearchBar,
   },
 };
 </script>
