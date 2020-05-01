@@ -1,18 +1,22 @@
 <template>
-  <div>
+  <div class="search-results">
     <h3 v-if="isLoading">Loading...</h3>
     <h3 v-else-if="isEmpty">Nothing</h3>
-
-    <div v-for="{ id, title, channelTitle, thumbnailURL } in searchItems" :key="id">
-      <h2>{{ title }}</h2>
-      <h3>{{ channelTitle }}</h3>
-      <img :src="thumbnailURL" alt="video-thumbnail" />
+    <div v-else class="search-results__actions">
+      <p class="search-results__actions__search-count">
+        About {{ resultsCount | formatNumber }} results
+      </p>
+    </div>
+    <div class="search-results__content">
+      <MediaCard v-for="item in searchItems" :item="item" :key="item.id" />
     </div>
   </div>
 </template>
 
 <script>
+import MediaCard from '@/components/MediaCard.component.vue';
 import api from '@/shared/services/api/api.service';
+import { formatNumber } from '../shared/services/helpers';
 import { getSearchParam, mapSearchResponse } from './Search.page.service';
 
 export default {
@@ -21,7 +25,7 @@ export default {
     if (searchParam) {
       this.search(searchParam);
     } else {
-      this.resetItems();
+      this.resetData();
     }
     next();
   },
@@ -31,8 +35,16 @@ export default {
     if (searchParam) {
       this.search(searchParam);
     } else {
-      this.resetItems();
+      this.resetData();
     }
+  },
+
+  components: {
+    MediaCard,
+  },
+
+  filters: {
+    formatNumber,
   },
 
   data() {
@@ -45,26 +57,32 @@ export default {
 
   methods: {
     search(searchParam) {
-      this.resetItems();
+      this.resetData();
       this.setLoading();
-      api.search(searchParam).then((res) => {
-        const { items } = mapSearchResponse(res.data);
-        if (items.length) {
-          this.setItems(items);
-        } else {
-          this.resetItems();
-        }
-        this.resetLoading();
-      });
+      api
+        .search(searchParam)
+        .then((res) => {
+          const { items, resultsCount } = mapSearchResponse(res.data);
+          if (items.length) {
+            this.setData(items, resultsCount);
+          } else {
+            this.resetData();
+          }
+        })
+        .finally(() => {
+          this.resetLoading();
+        });
     },
 
     // Helper functions
-    setItems(items) {
+    setData(items, count) {
       this.searchItems = items;
+      this.resultsCount = count;
       this.isEmpty = false;
     },
-    resetItems() {
+    resetData() {
       this.isEmpty = true;
+      this.resultsCount = 0;
       this.searchItems = [];
     },
     setLoading() {
@@ -76,3 +94,16 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.search-results {
+  &__actions {
+    margin-top: 3em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #e7e7e7;
+  }
+  &__content {
+    margin-top: 3em;
+  }
+}
+</style>
