@@ -1,17 +1,19 @@
 <template>
   <div id="app">
     <Header />
-    <main class="content">
+    <MainLayout>
       <router-view />
-    </main>
+    </MainLayout>
   </div>
 </template>
 <script>
-import Header from '@/layout/Header.component.vue';
+import Header from '@/layout/Header.layout.vue';
+import MainLayout from '@/layout/MainContent.layout.vue';
 
 export default {
   components: {
     Header,
+    MainLayout,
   },
 };
 </script>
@@ -21,9 +23,5 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
   margin: 0;
-}
-
-.content {
-  padding-top: 3em;
 }
 </style>
