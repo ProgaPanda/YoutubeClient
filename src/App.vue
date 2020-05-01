@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
-    <router-view />
+    <main class="content">
+      <router-view />
+    </main>
   </div>
 </template>
 <script>
@@ -19,5 +21,9 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
   margin: 0;
+}
+
+.content {
+  padding-top: 3em;
 }
 </style>
