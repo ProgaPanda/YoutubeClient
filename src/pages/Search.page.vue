@@ -1,6 +1,6 @@
 <template>
   <div class="search-results">
-    <h3 v-if="isLoading">Loading...</h3>
+    <h3 v-if="isLoading" class="search-results__loading"><LoadingIcon /></h3>
     <h3 v-else-if="isEmpty">Nothing</h3>
     <div v-else class="search-results__actions">
       <p class="search-results__actions__search-count">
@@ -18,6 +18,7 @@ import MediaCard from '@/components/MediaCard.component.vue';
 import api from '@/shared/services/api/api.service';
 import { getSearchParam, mapSearchResponse } from '@/shared/services/mappers';
 import { formatNumber } from '@/shared/services/helpers';
+import LoadingIcon from '../../public/img/icons/svg/loading.icon.svg';
 
 export default {
   beforeRouteUpdate(to, from, next) {
@@ -41,6 +42,7 @@ export default {
 
   components: {
     MediaCard,
+    LoadingIcon,
   },
 
   filters: {
@@ -97,6 +99,13 @@ export default {
 
 <style lang="scss" scoped>
 .search-results {
+  width: 100%;
+
+  &__loading {
+    margin-top: 50%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
   &__actions {
     margin-top: 3em;
     padding-bottom: 1em;
