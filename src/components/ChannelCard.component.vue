@@ -1,10 +1,12 @@
 <template>
   <div class="channel-card">
-    <img class="channel-card__thumbnail" :src="thumbnail" alt="video-thumbnail" />
+    <div class="channel-card__thumbnail">
+      <img :src="thumbnail" alt="video-thumbnail" />
+    </div>
     <div class="channel-card__details">
       <h4 class="channel-card__details__title">{{ title }}</h4>
       <p class="channel-card__details__sub-count">
-        {{ subscribeCount | formatNumber }} subscribers
+        {{ subscribeCount | formatNumber }} subscribers • <span>{{ videosCount }} videos</span>
       </p>
       <p class="channel-card__details__description">{{ description }}</p>
     </div>
@@ -28,8 +30,9 @@ export default {
 
   mounted() {
     api.getChannelDetails(this.id).then((response) => {
-      const { subscribeCount } = mapChannelResponse(response.data);
+      const { subscribeCount, videosCount } = mapChannelResponse(response.data);
       this.subscribeCount = subscribeCount;
+      this.videosCount = videosCount;
     });
   },
 
@@ -48,9 +51,14 @@ export default {
 <style lang="scss" scoped>
 .channel-card {
   display: flex;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
   &__thumbnail {
-    width: 25%;
+    img {
+      width: 100%;
+      @media screen and (max-width: 950px) {
+        width: 5em;
+      }
+    }
   }
   &__details {
     margin-left: 1em;
@@ -63,6 +71,10 @@ export default {
 
     &__description {
       color: #8b8b8b;
+
+      @media screen and (max-width: 950px) {
+        display: none;
+      }
     }
   }
 }

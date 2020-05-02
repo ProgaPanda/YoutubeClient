@@ -33,6 +33,7 @@ export const mapChannelResponse = (response) => {
   return {
     id: channelDetails.id,
     subscribeCount: channelDetails.statistics.subscriberCount,
+    videosCount: channelDetails.statistics.videoCount,
     title: channelDetails.snippet.title,
     description: channelDetails.snippet.description,
     thumbnailURL: channelDetails.snippet.thumbnails.medium.url,
