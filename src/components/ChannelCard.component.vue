@@ -39,6 +39,7 @@ export default {
   data() {
     return {
       subscribeCount: 0,
+      videosCount: 0,
     };
   },
 

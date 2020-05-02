@@ -14,12 +14,13 @@ export default {
    * @returns {Promise}
    */
   search: (searchParam, searchOptions = {}) => {
-    const { maxResults = 10, order = 'relevance' } = searchOptions;
+    const { maxResults = 10, order = 'relevance', pageToken } = searchOptions;
     return api.get(`search?part=snippet&key=${process.env.VUE_APP_YT_KEY}`, {
       params: {
         q: searchParam,
         maxResults,
         order,
+        pageToken,
       },
     });
   },

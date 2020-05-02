@@ -12,6 +12,7 @@ export const getSearchParam = (routeObject) => routeObject.query.query;
  */
 export const mapSearchResponse = (response) => ({
   resultsCount: response.pageInfo.totalResults,
+  nextPageToken: response.nextPageToken,
   items: response.items.map((item) => ({
     type: item.id.kind.split('#')[1],
     id: item.id.videoId || item.id.channelId || item.id.playlistId,
