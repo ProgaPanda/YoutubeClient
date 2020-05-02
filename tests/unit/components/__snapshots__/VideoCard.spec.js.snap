@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoCard renders correctly 1`] = `
+<div
+  class="video-card"
+>
+  <div
+    class="video-card__thumbnail"
+  >
+    <img
+      alt="video-thumbnail"
+    />
+  </div>
+   
+  <div
+    class="video-card__details"
+  >
+    <h4
+      class="video-card__details__title"
+    >
+      
+    </h4>
+     
+    <p
+      class="video-card__details__meta"
+    >
+       • 
+    </p>
+     
+    <p
+      class="video-card__details__description"
+    >
+      
+    </p>
+  </div>
+</div>
+`;

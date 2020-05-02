@@ -26,12 +26,6 @@ export default {
   components: {
     PlaylistIcon,
   },
-
-  data() {
-    return {
-      subscribeCount: 0,
-    };
-  },
 };
 </script>
 

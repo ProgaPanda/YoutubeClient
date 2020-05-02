@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChannelCard renders correctly 1`] = `
+<div
+  class="channel-card"
+>
+  <div
+    class="channel-card__thumbnail"
+  >
+    <img
+      alt="video-thumbnail"
+    />
+  </div>
+   
+  <div
+    class="channel-card__details"
+  >
+    <h4
+      class="channel-card__details__title"
+    >
+      
+    </h4>
+     
+    <p
+      class="channel-card__details__sub-count"
+    >
+      
+      0 subscribers • 
+      <span>
+        0 videos
+      </span>
+    </p>
+     
+    <p
+      class="channel-card__details__description"
+    >
+      
+    </p>
+  </div>
+</div>
+`;

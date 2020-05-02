@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlaylistCard renders correctly 1`] = `
+<div
+  class="playlist-card"
+>
+  <div
+    class="playlist-card__thumbnail"
+  >
+    <img
+      alt="video-thumbnail"
+    />
+     
+    <playlisticon-stub
+      class="playlist-card__thumbnail__icon"
+    />
+  </div>
+   
+  <div
+    class="playlist-card__details"
+  >
+    <h4
+      class="playlist-card__details__title"
+    >
+      
+    </h4>
+     
+    <p
+      class="playlist-card__details__meta"
+    >
+      
+    </p>
+     
+    <p
+      class="playlist-card__details__description"
+    >
+      
+    </p>
+  </div>
+</div>
+`;

@@ -22,18 +22,21 @@ export default {
   props: {
     id: String,
     title: String,
-    channel: String,
     thumbnail: String,
     description: String,
-    publishedAt: String,
   },
 
   mounted() {
-    api.getChannelDetails(this.id).then((response) => {
-      const { subscribeCount, videosCount } = mapChannelResponse(response.data);
-      this.subscribeCount = subscribeCount;
-      this.videosCount = videosCount;
-    });
+    api
+      .getChannelDetails(this.id)
+      .then((response) => {
+        const { subscribeCount, videosCount } = mapChannelResponse(response.data);
+        this.subscribeCount = subscribeCount;
+        this.videosCount = videosCount;
+      })
+      .catch(() => {
+        console.error('Channel request failed, you might have a connection issue');
+      });
   },
 
   data() {

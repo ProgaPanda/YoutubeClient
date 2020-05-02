@@ -12,10 +12,8 @@
       v-else-if="item.type === 'channel'"
       :id="item.id"
       :title="item.title"
-      :channel="item.channelTitle"
       :thumbnail="item.thumbnailURL"
       :description="item.description"
-      :publishedAt="item.date | getYearsAgo"
     />
     <PlaylistCard
       v-else-if="item.type === 'playlist'"
@@ -24,7 +22,6 @@
       :channel="item.channelTitle"
       :thumbnail="item.thumbnailURL"
       :description="item.description"
-      :publishedAt="item.date | getYearsAgo"
     />
   </div>
 </template>
