@@ -26,8 +26,13 @@ export default {
 <style lang="scss" scoped>
 .video-card {
   display: flex;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
   &__thumbnail {
+    img {
+      @media screen and (max-width: 950px) {
+        width: 12em;
+      }
+    }
   }
   &__details {
     margin-left: 1em;
@@ -45,6 +50,9 @@ export default {
 
     &__description {
       color: #8b8b8b;
+      @media screen and (max-width: 950px) {
+        display: none;
+      }
     }
   }
 }

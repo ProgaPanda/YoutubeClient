@@ -11,5 +11,10 @@
   display: flex;
   transform: translateX(-50%);
   margin-left: 50%;
+
+  @media screen and (max-width: 950px) {
+    width: 100%;
+    padding: 0 1em;
+  }
 }
 </style>

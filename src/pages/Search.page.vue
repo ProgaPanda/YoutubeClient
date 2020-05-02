@@ -101,6 +101,10 @@ export default {
     margin-top: 3em;
     padding-bottom: 1em;
     border-bottom: 1px solid #e7e7e7;
+
+    @media screen and (max-width: 950px) {
+      margin-top: 1em;
+    }
   }
   &__content {
     margin-top: 3em;

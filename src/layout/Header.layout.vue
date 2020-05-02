@@ -30,6 +30,10 @@ export default {
   border-bottom: 1px solid #cccccc;
   z-index: 1;
 
+  @media screen and (max-width: 950px) {
+    position: relative;
+  }
+
   &__logo {
     color: #000;
     text-transform: uppercase;

@@ -38,11 +38,17 @@ export default {
 <style lang="scss" scoped>
 .playlist-card {
   display: flex;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
   position: relative;
 
   &__thumbnail {
     position: relative;
+
+    img {
+      @media screen and (max-width: 950px) {
+        width: 12em;
+      }
+    }
 
     &__icon {
       position: absolute;
@@ -81,6 +87,9 @@ export default {
 
     &__description {
       color: #8b8b8b;
+      @media screen and (max-width: 950px) {
+        display: none;
+      }
     }
   }
 }
