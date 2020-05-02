@@ -1,7 +1,9 @@
 <template>
   <div class="search-results">
-    <h3 v-if="isLoading" class="search-results__loading"><LoadingIcon /></h3>
-    <h3 v-else-if="isEmpty">Nothing</h3>
+    <div v-if="isLoading" class="search-results__loading"><LoadingIcon /></div>
+    <p v-else-if="isEmpty" class="search-results__empty-state">
+      Nothing was found with this search parameter
+    </p>
     <div v-else class="search-results__actions">
       <p class="search-results__actions__search-count">
         About {{ resultsCount | formatNumber }} results
@@ -104,8 +106,17 @@ export default {
   &__loading {
     margin-top: 50%;
     margin-left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
   }
+
+  &__empty-state {
+    width: fit-content;
+    color: #808080;
+    margin-top: 50%;
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   &__actions {
     margin-top: 3em;
     padding-bottom: 1em;
@@ -115,6 +126,7 @@ export default {
       margin-top: 1em;
     }
   }
+
   &__content {
     margin-top: 3em;
   }
