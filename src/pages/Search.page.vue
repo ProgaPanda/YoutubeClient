@@ -81,8 +81,9 @@ import FilterIcon from '../../public/img/icons/svg/filter.icon.svg';
 export default {
   beforeRouteUpdate(to, from, next) {
     const searchParam = getSearchParam(to);
+    const filterOptions = mapToFilterOptions(this.filters);
     if (searchParam) {
-      this.search(searchParam);
+      this.search(searchParam, filterOptions);
     } else {
       this.resetData();
     }
@@ -175,17 +176,18 @@ export default {
     },
 
     setFilter(filterObject) {
-      if (filterObject.value !== this.filters[filterObject.type]) {
+      const searchParam = getSearchParam(this.$route);
+      const { type, value } = filterObject;
+      const currentFilters = { ...this.filters };
+      this.filters = {
+        ...this.filters,
+        [type]: value,
+      };
+
+      // Make sure filter value is different to prevent duplicate fetches
+      if (filterObject.value !== currentFilters[filterObject.type] && searchParam) {
         this.isFilterActive = false;
         this.nextPageToken = null;
-
-        const searchParam = getSearchParam(this.$route);
-        const { type, value } = filterObject;
-        this.filters = {
-          ...this.filters,
-          [type]: value,
-        };
-
         const filterOptions = mapToFilterOptions(this.filters);
         api
           .search(searchParam, { pageToken: this.nextPageToken, ...filterOptions })
