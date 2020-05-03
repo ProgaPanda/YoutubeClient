@@ -5,7 +5,9 @@
     </div>
     <div class="video-card__details">
       <h4 class="video-card__details__title">{{ title }}</h4>
-      <p class="video-card__details__meta">{{ channel }} • {{ publishedAt }}</p>
+      <p class="video-card__details__meta">
+        {{ channel }} <span v-if="channel && publishedAt">•</span> {{ publishedAt }}
+      </p>
       <p class="video-card__details__description">{{ description }}</p>
     </div>
   </div>

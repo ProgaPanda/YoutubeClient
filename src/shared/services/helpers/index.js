@@ -25,3 +25,16 @@ export const getRelativeDate = (date) => relativeDate(date);
  * @return {Date} generated date
  */
 export const getDateXHoursAgo = (hours) => new Date(Date.now() - hours * 60 * 60 * 1000);
+
+/**
+ * Function that returns a random color every time executed
+ * @return {string} RGB color
+ */
+export const getRandomColor = () => {
+  const letters = 'ABCDE'.split('');
+  let color = '#';
+  for (let i = 0; i < 3; i += 1) {
+    color += letters[Math.floor(Math.random() * letters.length)];
+  }
+  return color;
+};

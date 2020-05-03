@@ -46,6 +46,7 @@
         </template>
       </FilterLayout>
     </div>
+
     <div v-if="isLoading" class="search-page__loading"><LoadingIcon /></div>
 
     <p v-else-if="isEmpty" class="search-page__empty-state">
