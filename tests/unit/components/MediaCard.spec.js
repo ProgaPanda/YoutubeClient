@@ -4,7 +4,7 @@ import VideoCard from '@/components/VideoCard.component.vue';
 import ChannelCard from '@/components/ChannelCard.component.vue';
 import PlaylistCard from '@/components/PlaylistCard.component.vue';
 
-const getYearsAgo = () => 3;
+const getRelativeDate = () => 3;
 describe('MediaCard', () => {
   it('renders correctly', () => {
     const wrapper = shallowMount(MediaCard, {
@@ -12,7 +12,7 @@ describe('MediaCard', () => {
         item: {
           date: new Date(),
         },
-        mocks: { getYearsAgo },
+        mocks: { getRelativeDate },
       },
     });
     expect(wrapper.element).toMatchSnapshot();

@@ -6,7 +6,7 @@
       :channel="item.channelTitle"
       :thumbnail="item.thumbnailURL"
       :description="item.description"
-      :publishedAt="item.date | getYearsAgo"
+      :publishedAt="item.date | getRelativeDate"
     />
     <ChannelCard
       v-else-if="item.type === 'channel'"
@@ -30,7 +30,7 @@
 import VideoCard from './VideoCard.component.vue';
 import ChannelCard from './ChannelCard.component.vue';
 import PlaylistCard from './PlaylistCard.component.vue';
-import { getYearsAgo } from '../shared/services/helpers';
+import { getRelativeDate } from '../shared/services/helpers';
 
 export default {
   components: {
@@ -44,7 +44,7 @@ export default {
   },
 
   filters: {
-    getYearsAgo,
+    getRelativeDate,
   },
 };
 </script>
