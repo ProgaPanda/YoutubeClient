@@ -61,7 +61,7 @@ export default {
       top: 0;
       width: 30%;
       height: calc(100% - 0.25em);
-      background: rgba($color: #000000, $alpha: 0.5);
+      background: rgba($color: #000, $alpha: 0.5);
     }
   }
 

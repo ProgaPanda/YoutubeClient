@@ -1,19 +1,63 @@
 <template>
-  <div class="search-results">
-    <div v-if="isLoading" class="search-results__loading"><LoadingIcon /></div>
+  <div class="search-page">
+    <div v-if="isLoading" class="search-page__loading"><LoadingIcon /></div>
 
-    <p v-else-if="isEmpty" class="search-results__empty-state">
+    <p v-else-if="isEmpty" class="search-page__empty-state">
       Nothing was found with this search parameter
     </p>
 
-    <div v-else class="search-results__actions">
-      <p class="search-results__actions__search-count">
-        About {{ resultsCount | formatNumber }} results
-      </p>
+    <div v-else>
+      <div class="search-page__actions">
+        <p class="search-page__actions__search-count">
+          About {{ resultsCount | formatNumber }} results
+        </p>
+
+        <button class="search-page__actions__filter-toggle" @click="toggleFilterActive">
+          <FilterIcon class="search-page__actions__filter-toggle__icon" />Filter
+        </button>
+      </div>
+
+      <div class="search-page__filters-container">
+        <FilterLayout v-show="isFilterActive">
+          <template v-slot:desktop>
+            <FilterItemDesktop
+              name="Upload date"
+              :options="['Last hour', 'Today', 'This week', 'This month']"
+              @selectFilter="setFilter"
+            />
+            <FilterItemDesktop
+              name="Type"
+              :options="['Video', 'Channel', 'Playlist']"
+              @selectFilter="setFilter"
+            />
+            <FilterItemDesktop
+              name="Sort by"
+              :options="['Relevance', 'Upload date', 'View count', 'Rating']"
+              defaultOption="Relevance"
+              @selectFilter="setFilter"
+            />
+          </template>
+
+          <template v-slot:mobile>
+            <FilterItemMobile
+              name="Type"
+              :options="['All', 'Video', 'Channel', 'Playlist']"
+              defaultOption="All"
+              @selectFilter="setFilter"
+            />
+            <FilterItemMobile
+              name="Upload date"
+              :options="['Any time', 'Today', 'This week', 'This month']"
+              defaultOption="Any time"
+              @selectFilter="setFilter"
+            />
+          </template>
+        </FilterLayout>
+      </div>
     </div>
 
     <div
-      class="search-results__content"
+      class="search-page__content"
       v-infinite-scroll="loadMore"
       infinite-scroll-immediate-check="false"
       :infinite-scroll-disabled="isLoadingMore || isEmpty"
@@ -22,17 +66,21 @@
       <MediaCard v-for="(item, index) in searchItems" :item="item" :key="item.id + index" />
     </div>
 
-    <div v-if="isLoadingMore" class="search-results__loading--loading-more"><LoadingIcon /></div>
+    <div v-if="isLoadingMore" class="search-page__loading--loading-more"><LoadingIcon /></div>
   </div>
 </template>
 
 <script>
 import MediaCard from '@/components/MediaCard.component.vue';
+import FilterLayout from '@/layout/FilterLayout.component.vue';
+import FilterItemDesktop from '@/components/FilterItem.desktop.component.vue';
+import FilterItemMobile from '@/components/FilterItem.mobile.component.vue';
 import api from '@/shared/services/api/api.service';
 import infiniteScroll from 'vue-infinite-scroll';
 import { getSearchParam, mapSearchResponse } from '@/shared/services/mappers';
 import { formatNumber } from '@/shared/services/helpers';
 import LoadingIcon from '../../public/img/icons/svg/loading.icon.svg';
+import FilterIcon from '../../public/img/icons/svg/filter.icon.svg';
 
 export default {
   beforeRouteUpdate(to, from, next) {
@@ -55,8 +103,12 @@ export default {
   },
 
   components: {
+    FilterLayout,
+    FilterItemDesktop,
+    FilterItemMobile,
     MediaCard,
     LoadingIcon,
+    FilterIcon,
   },
 
   filters: {
@@ -74,6 +126,7 @@ export default {
       isLoadingMore: false,
       resultsCount: 0,
       nextPageToken: null,
+      isFilterActive: true,
     };
   },
 
@@ -112,6 +165,14 @@ export default {
         });
     },
 
+    // Filter functions
+    toggleFilterActive() {
+      this.isFilterActive = !this.isFilterActive;
+    },
+    setFilter(filterObject) {
+      console.log(filterObject.type, filterObject.value);
+    },
+
     // Helper functions
     setData(newItems, count, nextPageToken) {
       this.searchItems = [...this.searchItems, ...newItems];
@@ -137,7 +198,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.search-results {
+.search-page {
   width: 100%;
 
   &__loading {
@@ -159,17 +220,44 @@ export default {
   }
 
   &__actions {
+    display: flex;
+    justify-content: space-between;
     margin-top: 3em;
     padding-bottom: 1em;
     border-bottom: 1px solid #e7e7e7;
+
+    @media screen and (max-width: 950px) {
+      display: none;
+    }
+
+    &__filter-toggle {
+      display: flex;
+      align-items: flex-end;
+      border: 0;
+      color: #585858;
+      background: rgba($color: #000, $alpha: 0);
+      font-size: 1em;
+      cursor: pointer;
+
+      &__icon {
+        fill: #585858;
+        margin-right: 0.5em;
+      }
+    }
 
     @media screen and (max-width: 950px) {
       margin-top: 1em;
     }
   }
 
-  &__content {
-    margin-top: 3em;
+  &__filters-container {
+    margin-top: 2em;
+    margin-bottom: 5em;
+
+    @media screen and (max-width: 950px) {
+      margin-top: 1em;
+      margin-bottom: 2em;
+    }
   }
 }
 </style>
