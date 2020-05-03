@@ -48,7 +48,8 @@
     },
     "rules": {
       "implicit-arrow-linebreak": "off",
-      "import/prefer-default-export": "off"
+      "import/prefer-default-export": "off",
+      "object-curly-newline": "off"
     },
     "overrides": [
       {

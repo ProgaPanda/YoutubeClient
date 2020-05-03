@@ -40,11 +40,15 @@ export default {
   methods: {
     emitSelectedFilter(filterValue) {
       this.selectedFilter = filterValue;
-      this.$emit('selectFilter', { type: this.name, value: this.selectedFilter });
+      this.$emit('selectFilter', this.generateFilterObject());
     },
     resetSelectedFilter(event) {
       event.stopPropagation();
       this.selectedFilter = '';
+      this.$emit('selectFilter', this.generateFilterObject());
+    },
+    generateFilterObject() {
+      return { type: this.name, value: this.selectedFilter };
     },
   },
 };

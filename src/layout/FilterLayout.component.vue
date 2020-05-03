@@ -1,21 +1,21 @@
 <template>
-  <transition name="slide">
-    <div>
-      <div class="filter-container filter-container--desktop">
+  <div>
+    <transition name="slide">
+      <div v-show="show" class="filter-container filter-container--desktop">
         <slot name="desktop"></slot>
       </div>
+    </transition>
 
-      <div class="filter-container filter-container--mobile">
-        <slot name="mobile"></slot>
-      </div>
+    <div class="filter-container filter-container--mobile">
+      <slot name="mobile"></slot>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
 export default {
   props: {
-    name: String,
+    show: Boolean,
   },
 };
 </script>

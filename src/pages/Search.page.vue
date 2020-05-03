@@ -1,60 +1,56 @@
 <template>
   <div class="search-page">
+    <div class="search-page__actions">
+      <p class="search-page__actions__search-count">
+        About {{ resultsCount | formatNumber }} results
+      </p>
+
+      <button class="search-page__actions__filter-toggle" @click="toggleFilterActive">
+        <FilterIcon class="search-page__actions__filter-toggle__icon" />Filter
+      </button>
+    </div>
+    <div class="search-page__filters-container">
+      <FilterLayout :show="isFilterActive">
+        <template v-slot:desktop>
+          <FilterItemDesktop
+            name="Upload date"
+            :options="['Last hour', 'Today', 'This week', 'This month']"
+            @selectFilter="setFilter"
+          />
+          <FilterItemDesktop
+            name="Type"
+            :options="['Video', 'Channel', 'Playlist']"
+            @selectFilter="setFilter"
+          />
+          <FilterItemDesktop
+            name="Sort by"
+            :options="['Relevance', 'Upload date', 'View count', 'Rating']"
+            defaultOption="Relevance"
+            @selectFilter="setFilter"
+          />
+        </template>
+
+        <template v-slot:mobile>
+          <FilterItemMobile
+            name="Type"
+            :options="['All', 'Video', 'Channel', 'Playlist']"
+            defaultOption="All"
+            @selectFilter="setFilter"
+          />
+          <FilterItemMobile
+            name="Upload date"
+            :options="['Any time', 'Today', 'This week', 'This month']"
+            defaultOption="Any time"
+            @selectFilter="setFilter"
+          />
+        </template>
+      </FilterLayout>
+    </div>
     <div v-if="isLoading" class="search-page__loading"><LoadingIcon /></div>
 
     <p v-else-if="isEmpty" class="search-page__empty-state">
       Nothing was found with this search parameter
     </p>
-
-    <div v-else>
-      <div class="search-page__actions">
-        <p class="search-page__actions__search-count">
-          About {{ resultsCount | formatNumber }} results
-        </p>
-
-        <button class="search-page__actions__filter-toggle" @click="toggleFilterActive">
-          <FilterIcon class="search-page__actions__filter-toggle__icon" />Filter
-        </button>
-      </div>
-
-      <div class="search-page__filters-container">
-        <FilterLayout v-show="isFilterActive">
-          <template v-slot:desktop>
-            <FilterItemDesktop
-              name="Upload date"
-              :options="['Last hour', 'Today', 'This week', 'This month']"
-              @selectFilter="setFilter"
-            />
-            <FilterItemDesktop
-              name="Type"
-              :options="['Video', 'Channel', 'Playlist']"
-              @selectFilter="setFilter"
-            />
-            <FilterItemDesktop
-              name="Sort by"
-              :options="['Relevance', 'Upload date', 'View count', 'Rating']"
-              defaultOption="Relevance"
-              @selectFilter="setFilter"
-            />
-          </template>
-
-          <template v-slot:mobile>
-            <FilterItemMobile
-              name="Type"
-              :options="['All', 'Video', 'Channel', 'Playlist']"
-              defaultOption="All"
-              @selectFilter="setFilter"
-            />
-            <FilterItemMobile
-              name="Upload date"
-              :options="['Any time', 'Today', 'This week', 'This month']"
-              defaultOption="Any time"
-              @selectFilter="setFilter"
-            />
-          </template>
-        </FilterLayout>
-      </div>
-    </div>
 
     <div
       class="search-page__content"
@@ -77,7 +73,7 @@ import FilterItemDesktop from '@/components/FilterItem.desktop.component.vue';
 import FilterItemMobile from '@/components/FilterItem.mobile.component.vue';
 import api from '@/shared/services/api/api.service';
 import infiniteScroll from 'vue-infinite-scroll';
-import { getSearchParam, mapSearchResponse } from '@/shared/services/mappers';
+import { getSearchParam, mapSearchResponse, mapToFilterOptions } from '@/shared/services/mappers';
 import { formatNumber } from '@/shared/services/helpers';
 import LoadingIcon from '../../public/img/icons/svg/loading.icon.svg';
 import FilterIcon from '../../public/img/icons/svg/filter.icon.svg';
@@ -126,16 +122,22 @@ export default {
       isLoadingMore: false,
       resultsCount: 0,
       nextPageToken: null,
-      isFilterActive: true,
+      // Filters state
+      isFilterActive: false,
+      filters: {
+        Type: '',
+        'Upload date': '',
+        'Sort by': ' ',
+      },
     };
   },
 
   methods: {
-    search(searchParam) {
+    search(searchParam, options = {}) {
       this.resetData();
       this.setLoading();
       api
-        .search(searchParam)
+        .search(searchParam, options)
         .then((res) => {
           const { items, resultsCount, nextPageToken } = mapSearchResponse(res.data);
           if (items.length) {
@@ -151,9 +153,11 @@ export default {
 
     loadMore() {
       const searchParam = getSearchParam(this.$route);
+      const filterOptions = mapToFilterOptions(this.filters);
       this.isLoadingMore = true;
+
       api
-        .search(searchParam, { pageToken: this.nextPageToken })
+        .search(searchParam, { pageToken: this.nextPageToken, ...filterOptions })
         .then((res) => {
           const { items, resultsCount, nextPageToken } = mapSearchResponse(res.data);
           if (items.length) {
@@ -169,8 +173,35 @@ export default {
     toggleFilterActive() {
       this.isFilterActive = !this.isFilterActive;
     },
+
     setFilter(filterObject) {
-      console.log(filterObject.type, filterObject.value);
+      if (filterObject.value !== this.filters[filterObject.type]) {
+        this.isFilterActive = false;
+        this.nextPageToken = null;
+
+        const searchParam = getSearchParam(this.$route);
+        const { type, value } = filterObject;
+        this.filters = {
+          ...this.filters,
+          [type]: value,
+        };
+
+        const filterOptions = mapToFilterOptions(this.filters);
+        api
+          .search(searchParam, { pageToken: this.nextPageToken, ...filterOptions })
+          .then((res) => {
+            const { items, resultsCount, nextPageToken } = mapSearchResponse(res.data);
+            if (items.length) {
+              this.resetData();
+              this.setData(items, resultsCount, nextPageToken);
+            } else {
+              this.resetData();
+            }
+          })
+          .finally(() => {
+            this.resetLoading();
+          });
+      }
     },
 
     // Helper functions
@@ -186,6 +217,7 @@ export default {
       this.isEmpty = true;
       this.resultsCount = 0;
       this.searchItems = [];
+      this.nextPageToken = null;
     },
     setLoading() {
       this.isLoading = true;

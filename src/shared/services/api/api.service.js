@@ -14,13 +14,15 @@ export default {
    * @returns {Promise}
    */
   search: (searchParam, searchOptions = {}) => {
-    const { maxResults = 10, order = 'relevance', pageToken } = searchOptions;
+    const { maxResults = 10, order = 'relevance', type, publishedAfter, pageToken } = searchOptions;
     return api.get(`search?part=snippet&key=${process.env.VUE_APP_YT_KEY}`, {
       params: {
         q: searchParam,
         maxResults,
-        order,
         pageToken,
+        type,
+        order,
+        publishedAfter,
       },
     });
   },
@@ -31,7 +33,7 @@ export default {
    * @returns {Promise}
    */
   getChannelDetails: (channelId) =>
-    api.get(`channels?part=snippet,contentDetails,statistics&key=${process.env.VUE_APP_YT_KEY}`, {
+    api.get(`channels?part=snippet,statistics&key=${process.env.VUE_APP_YT_KEY}`, {
       params: {
         id: channelId,
       },

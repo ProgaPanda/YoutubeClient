@@ -23,7 +23,10 @@ export default {
 
   methods: {
     emitSelectedFilter() {
-      this.$emit('selectFilter', { type: this.name, value: this.selectedFilter });
+      this.$emit('selectFilter', this.generateFilterObject());
+    },
+    generateFilterObject() {
+      return { type: this.name, value: this.selectedFilter };
     },
   },
 };

@@ -21,3 +21,10 @@ export const getYearsAgo = (date) => {
     ? new Intl.RelativeTimeFormat('en').format(yearCount, 'year')
     : 'less than a year ago';
 };
+
+/**
+ * Function to get relative date x hours from today
+ * @param {number} hours
+ * @return {Date} generated date
+ */
+export const getDateXHoursAgo = (hours) => new Date(Date.now() - hours * 60 * 60 * 1000);
