@@ -27,9 +27,25 @@ export const mapSearchResponse = (response) => ({
 });
 
 /**
+ * maps YT playlist items response to UI structure
+ * @param {Object} response YT response
+ * @returns {{items: Array}} Mapped Response
+ */
+export const mapPlaylistResponse = (response) => ({
+  nextPageToken: response.nextPageToken,
+  items: response.items.map((item) => ({
+    id: item.snippet.resourceId.videoId,
+    title: item.snippet.title,
+    thumbnailURL: item.snippet.thumbnails.medium.url,
+    date: new Date(item.snippet.publishedAt),
+    description: `${item.snippet.description.substring(0, 140)}...`,
+  })),
+});
+
+/**
  * maps YT channel details response to UI structure
  * @param {Object} response YT response
- * @returns {{items: Array, resultsCount: Number}} Mapped Response
+ * @returns {Object} Mapped Response
  */
 export const mapChannelResponse = (response) => {
   const [channelDetails] = response.items;
@@ -38,6 +54,7 @@ export const mapChannelResponse = (response) => {
     subscribeCount: channelDetails.statistics.subscriberCount,
     videosCount: channelDetails.statistics.videoCount,
     title: channelDetails.snippet.title,
+    uploadsPlaylist: channelDetails.contentDetails.relatedPlaylists.uploads,
     description: channelDetails.snippet.description,
     thumbnailURL: channelDetails.snippet.thumbnails.medium.url,
   };
