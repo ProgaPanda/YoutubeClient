@@ -12,12 +12,12 @@ const routes = [
   },
   {
     path: '/search',
-    name: 'Search',
+    name: 'search',
     component: Search,
   },
   {
     path: '/channel/:id',
-    name: 'Channel',
+    name: 'channel',
     component: Channel,
   },
 ];

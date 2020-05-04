@@ -2,6 +2,7 @@
   <div class="media-card">
     <VideoCard
       v-if="item.type === 'video'"
+      :id="item.id"
       :title="item.title"
       :channel="item.channelTitle"
       :thumbnail="item.thumbnailURL"

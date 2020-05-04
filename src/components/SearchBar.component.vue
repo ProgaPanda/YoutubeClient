@@ -45,11 +45,12 @@ export default {
 .search {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+  padding-left: 2em;
 
   &__input {
-    width: 60%;
-    font-size: 0.8em;
+    flex-grow: 1;
     height: 3em;
     border: 1px solid #d8d8d8;
     padding: 0.5em;
@@ -58,7 +59,6 @@ export default {
 
   &__button {
     height: 3em;
-    font-size: 0.8em;
     padding: 0 1.5em;
     background: rgb(243, 243, 243);
     border: 1px solid #d8d8d8;

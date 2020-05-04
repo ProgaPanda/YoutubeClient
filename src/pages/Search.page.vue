@@ -58,7 +58,8 @@
       v-infinite-scroll="loadMore"
       infinite-scroll-immediate-check="false"
       :infinite-scroll-disabled="isLoadingMore || isEmpty"
-      :infinite-scroll-throttle-delay="800"
+      infinite-scroll-distance="400"
+      infinite-scroll-throttle-delay="800"
     >
       <MediaCard v-for="(item, index) in searchItems" :item="item" :key="item.id + index" />
     </div>

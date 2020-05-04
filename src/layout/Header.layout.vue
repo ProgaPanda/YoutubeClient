@@ -1,7 +1,7 @@
 <template>
   <header class="header">
-    <router-link to="/" class="header__logo">Youtube<span>client</span></router-link>
-    <div class="header__search-container">
+    <div class="header__content">
+      <router-link to="/" class="header__logo">Youtube<span>client</span></router-link>
       <SearchBar />
     </div>
   </header>
@@ -22,7 +22,6 @@ export default {
   height: 3em;
   width: 100%;
   position: fixed;
-  padding: 1em;
   background: #eee;
   display: flex;
   align-items: center;
@@ -32,6 +31,22 @@ export default {
 
   @media screen and (max-width: 950px) {
     position: relative;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: space-between;
+    margin-left: 50%;
+    transform: translateX(-50%);
+
+    @media screen and (max-width: 950px) {
+      width: 100%;
+      padding: 0 1em;
+      margin: 0;
+      transform: none;
+    }
   }
 
   &__logo {

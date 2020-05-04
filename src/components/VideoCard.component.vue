@@ -1,21 +1,24 @@
 <template>
-  <div class="video-card">
-    <div class="video-card__thumbnail">
-      <img :src="thumbnail" alt="video-thumbnail" />
+  <router-link :to="{ name: 'video', params: { id } }">
+    <div class="video-card">
+      <div class="video-card__thumbnail">
+        <img :src="thumbnail" alt="video-thumbnail" />
+      </div>
+      <div class="video-card__details">
+        <h4 class="video-card__details__title">{{ title }}</h4>
+        <p class="video-card__details__meta">
+          {{ channel }} <span v-if="channel && publishedAt">•</span> {{ publishedAt }}
+        </p>
+        <p class="video-card__details__description">{{ description }}</p>
+      </div>
     </div>
-    <div class="video-card__details">
-      <h4 class="video-card__details__title">{{ title }}</h4>
-      <p class="video-card__details__meta">
-        {{ channel }} <span v-if="channel && publishedAt">•</span> {{ publishedAt }}
-      </p>
-      <p class="video-card__details__description">{{ description }}</p>
-    </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
 export default {
   props: {
+    id: String,
     title: String,
     channel: String,
     thumbnail: String,

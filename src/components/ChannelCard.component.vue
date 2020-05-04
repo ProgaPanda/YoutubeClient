@@ -1,16 +1,18 @@
 <template>
-  <div class="channel-card">
-    <div class="channel-card__thumbnail">
-      <img :src="thumbnail" alt="video-thumbnail" />
+  <router-link :to="{ name: 'channel', params: { id } }">
+    <div class="channel-card">
+      <div class="channel-card__thumbnail">
+        <img :src="thumbnail" alt="video-thumbnail" />
+      </div>
+      <div class="channel-card__details">
+        <h4 class="channel-card__details__title">{{ title }}</h4>
+        <p class="channel-card__details__sub-count">
+          {{ subscribeCount | formatNumber }} subscribers • <span>{{ videosCount }} videos</span>
+        </p>
+        <p class="channel-card__details__description">{{ description }}</p>
+      </div>
     </div>
-    <div class="channel-card__details">
-      <h4 class="channel-card__details__title">{{ title }}</h4>
-      <p class="channel-card__details__sub-count">
-        {{ subscribeCount | formatNumber }} subscribers • <span>{{ videosCount }} videos</span>
-      </p>
-      <p class="channel-card__details__description">{{ description }}</p>
-    </div>
-  </div>
+  </router-link>
 </template>
 
 <script>

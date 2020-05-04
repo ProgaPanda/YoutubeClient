@@ -1,15 +1,17 @@
 <template>
-  <div class="playlist-card">
-    <div class="playlist-card__thumbnail">
-      <img :src="thumbnail" alt="video-thumbnail" />
-      <PlaylistIcon class="playlist-card__thumbnail__icon" />
+  <router-link :to="{ name: 'video', params: { id } }">
+    <div class="playlist-card">
+      <div class="playlist-card__thumbnail">
+        <img :src="thumbnail" alt="video-thumbnail" />
+        <PlaylistIcon class="playlist-card__thumbnail__icon" />
+      </div>
+      <div class="playlist-card__details">
+        <h4 class="playlist-card__details__title">{{ title }}</h4>
+        <p class="playlist-card__details__meta">{{ channel }}</p>
+        <p class="playlist-card__details__description">{{ description }}</p>
+      </div>
     </div>
-    <div class="playlist-card__details">
-      <h4 class="playlist-card__details__title">{{ title }}</h4>
-      <p class="playlist-card__details__meta">{{ channel }}</p>
-      <p class="playlist-card__details__description">{{ description }}</p>
-    </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
