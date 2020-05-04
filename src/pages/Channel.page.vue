@@ -4,7 +4,8 @@
     v-infinite-scroll="loadMore"
     infinite-scroll-immediate-check="false"
     :infinite-scroll-disabled="isLoadingMore || !uploadsPlaylistId"
-    :infinite-scroll-throttle-delay="800"
+    infinite-scroll-distance="400"
+    infinite-scroll-throttle-delay="800"
   >
     <header class="channel-page__header" :style="{ background: headerBackgroundColor }">
       <img
@@ -23,8 +24,18 @@
     </div>
 
     <div class="channel-page__content" v-if="!isLoading">
+      <h4 class="channel-page__content__title">Playlists</h4>
+      <div class="channel-page__content__playlists">
+        <PlaylistCard
+          v-for="({ id, thumbnailURL, date }, index) in playlists"
+          :key="id + index"
+          :thumbnail="thumbnailURL"
+          :publishedAt="date | getRelativeDate"
+        />
+      </div>
+
+      <h4 class="channel-page__content__title">Latest uploads</h4>
       <div class="channel-page__content__uploads">
-        <h4 class="channel-page__content__uploads__title">Latest uploads</h4>
         <VideoCard
           v-for="({ id, title, thumbnailURL, description, date }, index) in uploads"
           :key="id + index"
@@ -45,6 +56,7 @@
 </template>
 
 <script>
+import PlaylistCard from '@/components/PlaylistCard.component.vue';
 import VideoCard from '@/components/VideoCard.component.vue';
 import api from '@/shared/services/api/api.service';
 import infiniteScroll from 'vue-infinite-scroll';
@@ -54,6 +66,7 @@ import LoadingIcon from '../../public/img/icons/svg/loading.icon.svg';
 
 export default {
   components: {
+    PlaylistCard,
     VideoCard,
     LoadingIcon,
   },
@@ -80,6 +93,11 @@ export default {
       .finally(() => {
         this.isLoading = false;
       });
+
+    api.getChannelPlaylists(this.id).then((response) => {
+      const { items } = mapPlaylistResponse(response.data);
+      this.playlists = items;
+    });
   },
   data() {
     return {
@@ -90,6 +108,7 @@ export default {
       thumbnailURL: '',
       subscribeCount: 0,
       uploads: [],
+      playlists: [],
       uploadsPlaylistId: null,
       nextPageToken: null,
     };
@@ -129,6 +148,7 @@ export default {
 <style lang="scss" scoped>
 .channel-page {
   width: 100%;
+  margin-bottom: 5em;
 
   &__header {
     position: relative;
@@ -167,13 +187,18 @@ export default {
     margin-top: 1em;
     padding: 1em;
 
-    &__uploads {
-      &__title {
-        font-weight: 400;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 1em;
-      }
+    &__title {
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1em;
+    }
+
+    &__playlists {
+      display: flex;
+      overflow-x: scroll;
+      padding-top: 2em;
+      margin-bottom: 4em;
     }
   }
 

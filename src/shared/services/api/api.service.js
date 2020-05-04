@@ -40,6 +40,22 @@ export default {
     }),
 
   /**
+   * Returns matching playlist items list for given channel ID from YT API
+   * @param {string} channelId
+   * @returns {Promise}
+   */
+  getChannelPlaylists: (channelId, options = {}) => {
+    const { maxResults = 25, pageToken } = options;
+    return api.get(`playlists?part=snippet&key=${process.env.VUE_APP_YT_KEY}`, {
+      params: {
+        channelId,
+        maxResults,
+        pageToken,
+      },
+    });
+  },
+
+  /**
    * Returns matching playlist details for given playlist ID from YT API
    * @param {string} playlistId
    * @returns {Promise}

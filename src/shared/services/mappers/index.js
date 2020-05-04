@@ -34,7 +34,7 @@ export const mapSearchResponse = (response) => ({
 export const mapPlaylistResponse = (response) => ({
   nextPageToken: response.nextPageToken,
   items: response.items.map((item) => ({
-    id: item.snippet.resourceId.videoId,
+    id: item.id || item.snippet.resourceId.videoId,
     title: item.snippet.title,
     thumbnailURL: item.snippet.thumbnails.medium.url,
     date: new Date(item.snippet.publishedAt),
