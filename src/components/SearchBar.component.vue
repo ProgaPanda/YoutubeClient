@@ -29,7 +29,7 @@ export default {
       // Get last search param to avoid duplicate fetches
       const lastSearchParam = this.$route.query.query;
       if (searchParam && lastSearchParam !== searchParam) {
-        this.$router.push({ path: 'search', query: { query: searchParam } });
+        this.$router.push({ path: '/search', query: { query: searchParam } });
       }
     },
     handleKeyDownEnter(event) {
