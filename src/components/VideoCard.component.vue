@@ -46,6 +46,7 @@ export default {
 
     &__title {
       font-weight: normal;
+      color: #000;
     }
 
     &__meta {

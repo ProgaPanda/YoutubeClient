@@ -2,7 +2,7 @@
   <router-link :to="{ name: 'channel', params: { id } }">
     <div class="channel-card">
       <div class="channel-card__thumbnail">
-        <img :src="thumbnail" alt="video-thumbnail" />
+        <img :src="thumbnail" alt="channel-thumbnail" />
       </div>
       <div class="channel-card__details">
         <h4 class="channel-card__details__title">{{ title }}</h4>
@@ -58,6 +58,7 @@ export default {
 .channel-card {
   display: flex;
   margin-bottom: 2em;
+
   &__thumbnail {
     img {
       width: 100%;
@@ -66,6 +67,7 @@ export default {
       }
     }
   }
+
   &__details {
     margin-left: 1em;
     display: flex;
@@ -73,6 +75,7 @@ export default {
 
     &__title {
       font-weight: normal;
+      color: #000;
     }
 
     &__description {

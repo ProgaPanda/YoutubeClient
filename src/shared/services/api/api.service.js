@@ -14,7 +14,14 @@ export default {
    * @returns {Promise}
    */
   search: (searchParam, searchOptions = {}) => {
-    const { maxResults = 25, order = 'relevance', type, publishedAfter, pageToken } = searchOptions;
+    const {
+      maxResults = 25,
+      order = 'relevance',
+      type,
+      publishedAfter,
+      pageToken,
+      relatedToVideoId,
+    } = searchOptions;
     return api.get(`search?part=snippet&key=${process.env.VUE_APP_YT_KEY}`, {
       params: {
         q: searchParam,
@@ -23,6 +30,7 @@ export default {
         type,
         order,
         publishedAfter,
+        relatedToVideoId,
       },
     });
   },
@@ -70,4 +78,16 @@ export default {
       },
     });
   },
+
+  /**
+   * Returns matching video item for given video ID from YT API
+   * @param {string} videoId
+   * @returns {Promise}
+   */
+  getVideoById: (videoId) =>
+    api.get(`videos?part=snippet,statistics&key=${process.env.VUE_APP_YT_KEY}`, {
+      params: {
+        id: videoId,
+      },
+    }),
 };

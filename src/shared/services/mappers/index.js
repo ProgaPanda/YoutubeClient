@@ -27,14 +27,51 @@ export const mapSearchResponse = (response) => ({
 });
 
 /**
+ * maps YT video item response to UI structure
+ * @param {Object} response YT response
+ * @returns {{item: Object}} Mapped Response
+ */
+export const mapVideoResponse = (response) => {
+  const [videoDetails] = response.items;
+  return {
+    id: videoDetails.id,
+    channelId: videoDetails.snippet.channelId,
+    title: videoDetails.snippet.title,
+    date: new Date(videoDetails.snippet.publishedAt),
+    description: `${videoDetails.snippet.description.substring(0, 240)}...`,
+    views: videoDetails.statistics.viewCount,
+    reactions: {
+      likes: videoDetails.statistics.likeCount,
+      dislikes: videoDetails.statistics.dislikeCount,
+    },
+  };
+};
+
+/**
  * maps YT playlist items response to UI structure
  * @param {Object} response YT response
- * @returns {{items: Array}} Mapped Response
+ * @returns {{items: Array, nextPageToken:string}} Mapped Response
  */
 export const mapPlaylistResponse = (response) => ({
   nextPageToken: response.nextPageToken,
   items: response.items.map((item) => ({
-    id: item.id || item.snippet.resourceId.videoId,
+    id: item.id,
+    title: item.snippet.title,
+    thumbnailURL: item.snippet.thumbnails.medium.url,
+    date: new Date(item.snippet.publishedAt),
+    description: `${item.snippet.description.substring(0, 140)}...`,
+  })),
+});
+
+/**
+ * maps YT Videos items from YT playlist API to UI structure
+ * @param {Object} response YT response
+ * @returns {items: Array, nextPageToken:string}} Mapped Response
+ */
+export const mapVideosFromPlaylistResponse = (response) => ({
+  nextPageToken: response.nextPageToken,
+  items: response.items.map((item) => ({
+    id: item.snippet.resourceId.videoId,
     title: item.snippet.title,
     thumbnailURL: item.snippet.thumbnails.medium.url,
     date: new Date(item.snippet.publishedAt),

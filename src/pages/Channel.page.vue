@@ -39,6 +39,7 @@
         <VideoCard
           v-for="({ id, title, thumbnailURL, description, date }, index) in uploads"
           :key="id + index"
+          :id="id"
           :title="title"
           :thumbnail="thumbnailURL"
           :description="description"
@@ -60,7 +61,11 @@ import PlaylistCard from '@/components/PlaylistCard.component.vue';
 import VideoCard from '@/components/VideoCard.component.vue';
 import api from '@/shared/services/api/api.service';
 import infiniteScroll from 'vue-infinite-scroll';
-import { mapChannelResponse, mapPlaylistResponse } from '@/shared/services/mappers';
+import {
+  mapChannelResponse,
+  mapPlaylistResponse,
+  mapVideosFromPlaylistResponse,
+} from '@/shared/services/mappers';
 import { formatNumber, getRelativeDate, getRandomColor } from '@/shared/services/helpers';
 import LoadingIcon from '../../public/img/icons/svg/loading.icon.svg';
 
@@ -85,7 +90,7 @@ export default {
       .then((uploadsPlaylist) => {
         this.uploadsPlaylistId = uploadsPlaylist;
         api.getPlaylistData(uploadsPlaylist).then((response) => {
-          const { items, nextPageToken } = mapPlaylistResponse(response.data);
+          const { items, nextPageToken } = mapVideosFromPlaylistResponse(response.data);
           this.uploads = items;
           this.nextPageToken = nextPageToken;
         });
@@ -124,7 +129,7 @@ export default {
       api
         .getPlaylistData(this.uploadsPlaylistId, { pageToken: this.nextPageToken })
         .then((res) => {
-          const { items, nextPageToken } = mapPlaylistResponse(res.data);
+          const { items, nextPageToken } = mapVideosFromPlaylistResponse(res.data);
           if (items.length) {
             this.uploads = [...this.uploads, ...items];
             this.nextPageToken = nextPageToken;
