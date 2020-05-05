@@ -1,28 +1,13 @@
 <template>
   <div class="video-page">
-    <div v-if="isVideoLoading" class="video-page__loading">
-      <LoadingIcon />
-    </div>
-    <div class="video-page__video-container">
-      <iframe
-        class="video"
-        :src="`https://www.youtube.com/embed/${id}?autoplay=1`"
-        allowfullscreen
-      ></iframe>
-    </div>
-
-    <div v-if="!isVideoLoading" class="video-page__info">
-      <h3 class="video-page__info__title">{{ title }}</h3>
-      <div class="video-page__info__meta">
-        <p class="video-page__info__meta__stats">
-          {{ views | formatNumber }} views • {{ date | formatDate }}
-        </p>
-        <p class="video-page__info__meta__reactions">
-          {{ reactions.likes }} <span class="likes-wording">likes</span> • {{ reactions.dislikes }}
-          <span class="dislikes-wording">dislikes</span>
-        </p>
-      </div>
-    </div>
+    <VideoPlayer
+      :isLoading="isVideoLoading"
+      :id="id"
+      :title="title"
+      :views="views"
+      :date="date"
+      :reactions="reactions"
+    />
 
     <div v-if="isChannelDataLoading" class="video-page__loading">
       <LoadingIcon />
@@ -58,6 +43,7 @@
 import api from '@/shared/services/api/api.service';
 import { mapVideoResponse, mapChannelResponse, mapSearchResponse } from '@/shared/services/mappers';
 import { formatNumber, formatDate, getRelativeDate } from '@/shared/services/helpers';
+import VideoPlayer from '@/components/VideoPlayer.component.vue';
 import VideoCard from '@/components/VideoCard.component.vue';
 import LoadingIcon from '../../public/img/icons/svg/loading.icon.svg';
 
@@ -81,7 +67,7 @@ export default {
       title: '',
       description: '',
       date: null,
-      views: 0,
+      views: null,
       reactions: {},
       // channel data
       isChannelDataLoading: false,
@@ -153,6 +139,7 @@ export default {
   },
 
   components: {
+    VideoPlayer,
     VideoCard,
     LoadingIcon,
   },
@@ -165,53 +152,6 @@ export default {
 
   &__loading {
     margin-top: 3em;
-  }
-
-  &__video-container {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-
-    .video {
-      position: absolute;
-      border: 0;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  &__info {
-    margin-top: 1em;
-    padding-bottom: 2em;
-    border-bottom: 1px solid #eee;
-
-    &__title {
-      font-weight: normal;
-      margin-bottom: 0.5em;
-    }
-
-    &__meta {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #757575;
-
-      &__reactions {
-        .likes-wording {
-          color: #249b6d;
-        }
-        .dislikes-wording {
-          color: #c07070;
-        }
-      }
-    }
   }
 
   &__channel-info {
