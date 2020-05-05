@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'video', params: { id } }">
+  <router-link :to="{ name: 'video', params: { id }, query: { playlist: true } }">
     <div class="playlist-card">
       <div class="playlist-card__thumbnail">
         <img :src="thumbnail" alt="video-thumbnail" />

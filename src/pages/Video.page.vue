@@ -23,9 +23,23 @@
       </div>
     </div>
 
-    <div v-if="!isRelatedVideosLoading" class="video-page__related-vids">
-      <h4 class="video-page__related-vids__title">Latest uploads</h4>
-      <div class="video-page__related-vids__list">
+    <div v-if="isPlaylist" class="video-page__videos-list ">
+      <h4 class="video-page__videos-list__title">Playlist videos</h4>
+      <div class="video-page__videos-list__list video-page__videos-list--playlist">
+        <VideoCard
+          v-for="({ id, title, thumbnailURL, date }, index) in playlistVideos"
+          :key="id + index"
+          :id="id"
+          :title="title"
+          :thumbnail="thumbnailURL"
+          :publishedAt="date | getRelativeDate"
+        />
+      </div>
+    </div>
+
+    <div v-if="!isRelatedVideosLoading" class="video-page__videos-list">
+      <h4 class="video-page__videos-list__title">Related Videos</h4>
+      <div class="video-page__videos-list__list">
         <VideoCard
           v-for="({ id, title, thumbnailURL, date }, index) in relatedVideos"
           :key="id + index"
@@ -41,7 +55,12 @@
 
 <script>
 import api from '@/shared/services/api/api.service';
-import { mapVideoResponse, mapChannelResponse, mapSearchResponse } from '@/shared/services/mappers';
+import {
+  mapVideoResponse,
+  mapChannelResponse,
+  mapSearchResponse,
+  mapVideosFromPlaylistResponse,
+} from '@/shared/services/mappers';
 import { formatNumber, formatDate, getRelativeDate } from '@/shared/services/helpers';
 import VideoPlayer from '@/components/VideoPlayer.component.vue';
 import VideoCard from '@/components/VideoCard.component.vue';
@@ -49,13 +68,26 @@ import LoadingIcon from '../../public/img/icons/svg/loading.icon.svg';
 
 export default {
   mounted() {
-    this.fetchContent();
+    if (this.isPlaylist) {
+      this.fetchPlaylistData();
+    } else {
+      this.fetchContent();
+    }
   },
 
   beforeRouteUpdate(to, from, next) {
     const newId = to.params.id;
     this.id = newId;
-    this.fetchContent();
+
+    // check if playlist before changing route
+    const isPlaylist = to.query.playlist ?? false;
+    this.isPlaylist = isPlaylist;
+    if (this.isPlaylist) {
+      this.fetchPlaylistData();
+    } else {
+      this.fetchContent();
+    }
+
     next();
   },
 
@@ -78,6 +110,9 @@ export default {
       // related videos data
       isRelatedVideosLoading: false,
       relatedVideos: [],
+      // playlist data
+      isPlaylist: this.$route.query.playlist ?? false,
+      playlistVideos: [],
     };
   },
 
@@ -121,6 +156,17 @@ export default {
         .finally(() => {
           this.isRelatedVideosLoading = false;
         });
+    },
+
+    fetchPlaylistData() {
+      api.getPlaylistData(this.id).then((response) => {
+        const { items } = mapVideosFromPlaylistResponse(response.data);
+        const [firstVideo, ...restVideos] = items;
+
+        this.id = firstVideo?.id;
+        this.playlistVideos = restVideos;
+        this.fetchContent();
+      });
     },
 
     setData({ title, date, description, views, reactions }) {
@@ -180,8 +226,17 @@ export default {
     }
   }
 
-  &__related-vids {
+  &__videos-list {
     margin-top: 2em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid #ccc;
+
+    &--playlist {
+      background: rgb(230, 230, 230);
+      height: 20em;
+      padding: 1em;
+      overflow-y: auto;
+    }
 
     &__title {
       font-weight: normal;

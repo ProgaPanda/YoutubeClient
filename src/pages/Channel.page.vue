@@ -28,6 +28,7 @@
       <div class="channel-page__content__playlists">
         <PlaylistCard
           v-for="({ id, thumbnailURL, date }, index) in playlists"
+          :id="id"
           :key="id + index"
           :thumbnail="thumbnailURL"
           :publishedAt="date | getRelativeDate"
