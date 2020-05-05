@@ -24,5 +24,9 @@ body {
   box-sizing: border-box;
   margin: 0;
   text-decoration: none;
+  &::selection {
+    color: white;
+    background: $color-secondary;
+  }
 }
 </style>

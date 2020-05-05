@@ -59,7 +59,12 @@ export default {
     background: $color-accent;
 
     &::placeholder {
-      color: $color-primary;
+      text-transform: uppercase;
+      color: $color-accent-800;
+    }
+
+    &:focus {
+      outline: 1px solid $color-secondary;
     }
   }
 

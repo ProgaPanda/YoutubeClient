@@ -79,7 +79,6 @@ export default {
   &__info {
     margin-top: 1em;
     padding-bottom: 2em;
-    border-bottom: 1px solid $color-accent;
 
     &__title {
       font-weight: normal;
@@ -98,7 +97,7 @@ export default {
           color: #59917b;
         }
         .dislikes-wording {
-          color: #977a7a;
+          color: #db9292;
         }
       }
     }

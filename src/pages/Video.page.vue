@@ -8,7 +8,9 @@
       :date="date"
       :reactions="reactions"
     />
-
+    <div class="video-page__reactions-ratio-container">
+      <div class="ratio-bar" :style="{ width: `${reactionsRatio}%` }" />
+    </div>
     <div v-if="isChannelDataLoading" class="video-page__loading">
       <LoadingIcon />
     </div>
@@ -178,6 +180,12 @@ export default {
     },
   },
 
+  computed: {
+    reactionsRatio() {
+      const { likes, dislikes } = this.reactions;
+      return (Number(likes) / (Number(likes) + Number(dislikes) * 4)) * 100;
+    },
+  },
   filters: {
     formatNumber,
     formatDate,
@@ -198,6 +206,17 @@ export default {
 
   &__loading {
     margin-top: 3em;
+  }
+
+  &__reactions-ratio-container {
+    width: 100%;
+    height: 0.25em;
+    background: #f3c7c7;
+
+    .ratio-bar {
+      background: #c0e9d9;
+      height: 100%;
+    }
   }
 
   &__channel-info {

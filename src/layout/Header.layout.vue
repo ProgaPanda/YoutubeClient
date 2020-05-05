@@ -55,6 +55,7 @@ export default {
     font-weight: normal;
     text-decoration: none;
     span {
+      color: $color-secondary;
       font-weight: bold;
     }
   }
