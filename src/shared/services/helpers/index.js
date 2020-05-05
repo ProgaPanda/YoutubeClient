@@ -38,3 +38,13 @@ export const getRandomColor = () => {
   }
   return color;
 };
+
+/**
+ * Returns the wording for the date
+ * @param {Date} date date to format
+ * @return {string} formatted string
+ */
+export const formatDate = (date) => {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Intl.DateTimeFormat('en-US', options).format(date);
+};
