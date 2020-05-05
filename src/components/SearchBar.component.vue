@@ -52,24 +52,30 @@ export default {
   &__input {
     flex-grow: 1;
     height: 3em;
-    border: 1px solid #d8d8d8;
-    padding: 0.5em;
+    border: 0;
+    padding: 0.75em;
     border-right: 0;
+    color: $color-primary;
+    background: $color-accent;
+
+    &::placeholder {
+      color: $color-primary;
+    }
   }
 
   &__button {
     height: 3em;
     padding: 0 1.5em;
-    background: rgb(243, 243, 243);
-    border: 1px solid #d8d8d8;
+    background: $color-accent;
+    border: 0;
     border-left: 0;
 
     &:hover {
-      background: #d8d8d8;
+      background: $color-accent-200;
     }
 
     &:active {
-      background: #d3d3d3;
+      background: $color-accent-400;
     }
   }
 }

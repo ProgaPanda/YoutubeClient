@@ -25,16 +25,16 @@ export default {
   display: flex;
 
   &--desktop {
-    @media screen and (max-width: 950px) {
+    @media screen and (max-width: $mobile-break-point) {
       display: none;
     }
   }
 
   &--mobile {
     padding-bottom: 1.5em;
-    border-bottom: 1px solid #e7e7e7;
+    border-bottom: 1px solid $color-accent;
 
-    @media screen and (min-width: 950px) {
+    @media screen and (min-width: $mobile-break-point) {
       display: none;
     }
   }

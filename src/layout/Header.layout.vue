@@ -19,17 +19,17 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  height: 3em;
-  width: 100%;
-  position: fixed;
-  background: #eee;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #cccccc;
+  height: 3em;
+  width: 100%;
+  position: fixed;
+  background: #fff;
+  box-shadow: 0px 3px 14px 0px $color-accent;
   z-index: 1;
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: $mobile-break-point) {
     position: relative;
   }
 
@@ -41,7 +41,7 @@ export default {
     margin-left: 50%;
     transform: translateX(-50%);
 
-    @media screen and (max-width: 950px) {
+    @media screen and (max-width: $mobile-break-point) {
       width: 100%;
       padding: 0 1em;
       margin: 0;
@@ -50,12 +50,11 @@ export default {
   }
 
   &__logo {
-    color: #000;
+    color: $color-primary;
     text-transform: uppercase;
     font-weight: normal;
     text-decoration: none;
     span {
-      color: #a33030;
       font-weight: bold;
     }
   }

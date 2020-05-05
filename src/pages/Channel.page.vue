@@ -160,7 +160,6 @@ export default {
     position: relative;
     height: 10em;
     width: 100%;
-    background: #888;
     padding: 1em;
 
     &__thumbnail {
@@ -205,6 +204,7 @@ export default {
       overflow-x: scroll;
       padding-top: 2em;
       margin-bottom: 4em;
+      background: $color-accent;
     }
   }
 

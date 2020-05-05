@@ -62,7 +62,7 @@ export default {
   &__title {
     font-weight: 500;
     padding-bottom: 1em;
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid $color-accent;
   }
 
   &__list {
@@ -71,18 +71,18 @@ export default {
 
     &__item {
       margin-top: 0.75em;
-      color: #858585;
+      color: $color-primary;
       cursor: pointer;
 
       &--active {
-        color: #000;
+        color: $color-primary-200;
         font-weight: 500;
       }
 
       &__remove-filter {
         cursor: pointer;
         border: none;
-        background: rgba($color: #000, $alpha: 0);
+        background: transparent;
       }
     }
   }

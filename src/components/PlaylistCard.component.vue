@@ -41,7 +41,7 @@ export default {
     position: relative;
 
     img {
-      @media screen and (max-width: 950px) {
+      @media screen and (max-width: $mobile-break-point) {
         width: 12em;
       }
     }
@@ -74,17 +74,17 @@ export default {
 
     &__title {
       font-weight: normal;
-      color: #000;
     }
 
     &__meta {
-      color: #8b8b8b;
+      color: $color-primary;
       margin-bottom: 0.5em;
     }
 
     &__description {
-      color: #8b8b8b;
-      @media screen and (max-width: 950px) {
+      color: $color-accent-800;
+
+      @media screen and (max-width: $mobile-break-point) {
         display: none;
       }
     }

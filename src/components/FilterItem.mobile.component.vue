@@ -39,6 +39,8 @@ export default {
   &__select {
     font-size: 1.1em;
     padding: 0.5em;
+    background: $color-accent;
+    border: 0;
   }
 }
 </style>

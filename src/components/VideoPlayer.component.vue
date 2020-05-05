@@ -79,7 +79,7 @@ export default {
   &__info {
     margin-top: 1em;
     padding-bottom: 2em;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid $color-accent;
 
     &__title {
       font-weight: normal;
@@ -92,14 +92,13 @@ export default {
       flex-wrap: wrap;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #757575;
 
       &__reactions {
         .likes-wording {
-          color: #249b6d;
+          color: #59917b;
         }
         .dislikes-wording {
-          color: #c07070;
+          color: #977a7a;
         }
       }
     }

@@ -207,7 +207,7 @@ export default {
     text-transform: uppercase;
     letter-spacing: 1px;
     padding-bottom: 2em;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid $color-accent;
 
     .thumbnail {
       width: 12%;
@@ -217,11 +217,12 @@ export default {
     .details {
       margin-left: 0.5em;
       .subscribers {
-        color: #757575;
+        color: $color-primary;
       }
       .video-describtion {
-        margin-top: 1em;
-        color: #757575;
+        margin-top: 0.5em;
+        text-transform: none;
+        color: $color-accent-800;
       }
     }
   }
@@ -229,10 +230,10 @@ export default {
   &__videos-list {
     margin-top: 2em;
     padding-bottom: 2em;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid $color-accent;
 
     &--playlist {
-      background: rgb(230, 230, 230);
+      background: $color-accent;
       height: 20em;
       padding: 1em;
       overflow-y: auto;

@@ -12,7 +12,7 @@
   transform: translateX(-50%);
   margin-left: 50%;
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: $mobile-break-point) {
     width: 100%;
     padding: 0 1em;
   }

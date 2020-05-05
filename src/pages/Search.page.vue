@@ -249,7 +249,7 @@ export default {
 
   &__empty-state {
     width: fit-content;
-    color: #808080;
+    color: $color-accent-800;
     margin-top: 50%;
     margin-left: 50%;
     transform: translate(-50%, -50%);
@@ -260,9 +260,9 @@ export default {
     justify-content: space-between;
     margin-top: 3em;
     padding-bottom: 1em;
-    border-bottom: 1px solid #e7e7e7;
+    border-bottom: 1px solid $color-accent;
 
-    @media screen and (max-width: 950px) {
+    @media screen and (max-width: $mobile-break-point) {
       display: none;
     }
 
@@ -270,18 +270,18 @@ export default {
       display: flex;
       align-items: flex-end;
       border: 0;
-      color: #585858;
-      background: rgba($color: #000, $alpha: 0);
+      color: $color-primary-200;
+      background: transparent;
       font-size: 1em;
       cursor: pointer;
 
       &__icon {
-        fill: #585858;
+        fill: $color-primary-200;
         margin-right: 0.5em;
       }
     }
 
-    @media screen and (max-width: 950px) {
+    @media screen and (max-width: $mobile-break-point) {
       margin-top: 1em;
     }
   }
@@ -290,7 +290,7 @@ export default {
     margin-top: 2em;
     margin-bottom: 5em;
 
-    @media screen and (max-width: 950px) {
+    @media screen and (max-width: $mobile-break-point) {
       margin-top: 1em;
       margin-bottom: 2em;
     }

@@ -58,11 +58,12 @@ export default {
 .channel-card {
   display: flex;
   margin-bottom: 2em;
+  color: $color-accent-800;
 
   &__thumbnail {
     img {
       width: 100%;
-      @media screen and (max-width: 950px) {
+      @media screen and (max-width: $mobile-break-point) {
         width: 5em;
       }
     }
@@ -76,12 +77,21 @@ export default {
     &__title {
       font-weight: normal;
       color: #000;
+      color: $color-primary-200;
+    }
+
+    &__sub-count {
+      color: $color-primary;
+
+      span {
+        color: $color-primary;
+      }
     }
 
     &__description {
-      color: #8b8b8b;
+      color: $color-accent-800;
 
-      @media screen and (max-width: 950px) {
+      @media screen and (max-width: $mobile-break-point) {
         display: none;
       }
     }
