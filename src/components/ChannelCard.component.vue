@@ -77,6 +77,7 @@ export default {
 
     &__sub-count {
       color: $color-primary;
+      font-size: 0.85em;
 
       span {
         color: $color-primary;
@@ -85,6 +86,7 @@ export default {
 
     &__description {
       color: $color-accent-800;
+      font-size: 0.85em;
 
       @media screen and (max-width: $mobile-break-point) {
         display: none;

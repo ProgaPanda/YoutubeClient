@@ -78,11 +78,13 @@ export default {
 
     &__meta {
       color: $color-primary;
+      font-size: 0.85em;
       margin-bottom: 0.5em;
     }
 
     &__description {
       color: $color-accent-800;
+      font-size: 0.85em;
 
       @media screen and (max-width: $mobile-break-point) {
         display: none;
