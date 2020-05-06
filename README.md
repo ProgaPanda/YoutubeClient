@@ -1,5 +1,5 @@
 # YouTube Client | with Vue.js
-A **Youtube SPA** client utilizing Youtube Data API V3.0 built with **Vue.js**
+A **Youtube client** utilizing Youtube Data API V3.0 built with **Vue.js**
 
 
 ![YT Client Logo](https://github.com/ProgaPanda/YoutubeClient/blob/master/public/img/icons/android-chrome-192x192.png)
