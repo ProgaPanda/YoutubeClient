@@ -33,7 +33,13 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ```
 yarn install
 ```
+## Enviroment setup
+Add the following key value with your Youtube Data API key to the .env file.
 
+[How to get your key](https://developers.google.com/youtube/v3/getting-started)
+```
+VUE_APP_YT_KEY=YOUR_KEY_HERE
+```
 ### Compiles and hot-reloads for development
 ```
 yarn serve
