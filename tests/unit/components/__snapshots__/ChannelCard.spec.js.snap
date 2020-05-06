@@ -2,8 +2,6 @@
 
 exports[`ChannelCard renders correctly 1`] = `
 <router-link-stub
-  channel="String"
-  publishedat="3 years ago"
   to="[object Object]"
 >
   <div

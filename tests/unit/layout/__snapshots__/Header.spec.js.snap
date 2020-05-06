@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderLayout renders correctly 1`] = `
+<header
+  class="header"
+>
+  <div
+    class="header__content"
+  >
+    <router-link-stub
+      class="header__logo"
+      to="/"
+    >
+      YT
+      <span>
+        client
+      </span>
+    </router-link-stub>
+     
+    <searchbar-stub />
+  </div>
+</header>
+`;

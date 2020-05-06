@@ -12,6 +12,7 @@ exports[`VideoCard renders correctly 1`] = `
     >
       <img
         alt="video-thumbnail"
+        src="url"
       />
     </div>
      
@@ -21,23 +22,25 @@ exports[`VideoCard renders correctly 1`] = `
       <h4
         class="video-card__details__title"
       >
-        
+        title
       </h4>
        
       <p
         class="video-card__details__meta"
       >
         
-         
-        <!---->
-         
+        channel title 
+        <span>
+          •
+        </span>
+         3 years ago
       
       </p>
        
       <p
         class="video-card__details__description"
       >
-        
+        description
       </p>
     </div>
   </div>

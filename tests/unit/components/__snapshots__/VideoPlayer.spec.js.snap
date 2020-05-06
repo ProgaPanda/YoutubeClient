@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoPlayer renders correctly 1`] = `
+<div
+  class="video-player"
+>
+  <!---->
+   
+  <div
+    class="video-player__video-container"
+  >
+    <iframe
+      allowfullscreen="allowfullscreen"
+      class="video"
+      src="https://www.youtube.com/embed/undefined"
+    />
+  </div>
+   
+  <div
+    class="video-player__info"
+  >
+    <h3
+      class="video-player__info__title"
+    >
+      video title
+    </h3>
+     
+    <div
+      class="video-player__info__meta"
+    >
+      <p
+        class="video-player__info__meta__stats"
+      >
+        
+        1,000 views • May 7, 2020
+      
+      </p>
+       
+      <p
+        class="video-player__info__meta__reactions"
+      >
+        
+        10 
+        <span
+          class="likes-wording"
+        >
+          likes
+        </span>
+         •
+        10
+        
+        <span
+          class="dislikes-wording"
+        >
+          dislikes
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+`;

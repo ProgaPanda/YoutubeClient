@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterItemMobile renders correctly 1`] = `
+<div
+  class="filter-item"
+>
+  <select
+    class="filter-item__select"
+  >
+    <option>
+      
+      All
+    
+    </option>
+    <option>
+      
+      Video
+    
+    </option>
+    <option>
+      
+      Channel
+    
+    </option>
+    <option>
+      
+      Playlist
+    
+    </option>
+  </select>
+</div>
+`;

@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterItemDesktop renders correctly 1`] = `
+<div
+  class="filter-item"
+>
+  <h5
+    class="filter-item__title"
+  >
+    Type
+  </h5>
+   
+  <ul
+    class="filter-item__list"
+  >
+    <li
+      class="filter-item__list__item filter-item__list__item--active"
+    >
+      
+      All
+      
+      <!---->
+    </li>
+    <li
+      class="filter-item__list__item"
+    >
+      
+      Video
+      
+      <!---->
+    </li>
+    <li
+      class="filter-item__list__item"
+    >
+      
+      Channel
+      
+      <!---->
+    </li>
+    <li
+      class="filter-item__list__item"
+    >
+      
+      Playlist
+      
+      <!---->
+    </li>
+  </ul>
+</div>
+`;

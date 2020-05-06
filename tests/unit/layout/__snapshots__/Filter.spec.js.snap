@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterContainer renders correctly 1`] = `
+<div>
+  <transition-stub
+    name="slide"
+  >
+    <div
+      class="filter-container filter-container--desktop"
+    />
+  </transition-stub>
+   
+  <div
+    class="filter-container filter-container--mobile"
+  />
+</div>
+`;

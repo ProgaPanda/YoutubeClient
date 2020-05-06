@@ -47,10 +47,8 @@ describe('ChannelCard', () => {
       propsData: {
         id: 'id',
         title: 'title',
-        channel: 'String',
         thumbnail: 'url',
         description: 'description',
-        publishedAt: '3 years ago',
       },
       stubs: ['router-link'],
     });
@@ -75,10 +73,8 @@ describe('ChannelCard', () => {
       propsData: {
         id: 'id',
         title: 'title',
-        channel: 'String',
         thumbnail: 'url',
         description: 'description',
-        publishedAt: '3 years ago',
       },
       stubs: ['router-link'],
     });
