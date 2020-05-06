@@ -40,7 +40,7 @@ export default {
   }
 }
 
-// Transition classes
+// Transition styles
 .slide-enter-active {
   transition-duration: 0.3s;
   transition-timing-function: ease-in;
