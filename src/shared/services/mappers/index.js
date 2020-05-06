@@ -22,7 +22,7 @@ export const mapSearchResponse = (response) => ({
     title: item.snippet.title,
     date: new Date(item.snippet.publishedAt),
     description: item.snippet.description,
-    thumbnailURL: item.snippet.thumbnails.medium.url,
+    thumbnailURL: item.snippet.thumbnails?.medium?.url,
   })),
 });
 
