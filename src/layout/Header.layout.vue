@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="header__content">
-      <router-link to="/" class="header__logo">Youtube<span>client</span></router-link>
+      <router-link to="/" class="header__logo">YT<span>client</span></router-link>
       <SearchBar />
     </div>
   </header>

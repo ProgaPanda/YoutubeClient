@@ -35,8 +35,10 @@ export default {
 <style lang="scss" scoped>
 .filter-item {
   margin-right: 1em;
+  flex-grow: 1;
 
   &__select {
+    width: 100%;
     font-size: 1.1em;
     padding: 0.5em;
     background: $color-accent;
