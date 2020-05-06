@@ -22,41 +22,27 @@ const mockedApiResponse = {
           subscriberCount: 1080000,
           videoCount: 784,
         },
+        contentDetails: {
+          relatedPlaylists: {
+            likes: '',
+            favorites: '',
+            uploads: 'UU29ju8bIPH5as8OGnQzwJyA',
+            watchHistory: 'HL',
+            watchLater: 'WL',
+          },
+        },
       },
     ],
   },
 };
 
 // Mocking API layer
-jest.mock('@/shared/services/api/api.service', () => ({
+jest.mock('@/shared/services/api/api.service.js', () => ({
   getChannelDetails: jest.fn(() => Promise.resolve(mockedApiResponse)),
 }));
 
 describe('ChannelCard', () => {
   it('renders correctly', () => {
-    const wrapper = shallowMount(ChannelCard, {
-      id: 'id',
-      title: 'title',
-      channel: 'String',
-      thumbnail: 'url',
-      description: 'description',
-      publishedAt: '3 years ago',
-    });
-    expect(wrapper.element).toMatchSnapshot();
-  });
-
-  it('calls api module with getChannelDetails after mount', () => {
-    const CHANNEL_ID = 'MOCK_ID';
-    shallowMount(ChannelCard, {
-      propsData: {
-        id: CHANNEL_ID,
-      },
-    });
-
-    expect(api.getChannelDetails).toBeCalledWith(CHANNEL_ID);
-  });
-
-  it('updates videos count and subscribers count after getChannelDetails request', () => {
     const wrapper = shallowMount(ChannelCard, {
       propsData: {
         id: 'id',
@@ -66,6 +52,35 @@ describe('ChannelCard', () => {
         description: 'description',
         publishedAt: '3 years ago',
       },
+      stubs: ['router-link'],
+    });
+
+    expect(wrapper.element).toMatchSnapshot();
+  });
+
+  it('calls api module with getChannelDetails after mount', () => {
+    const CHANNEL_ID = 'MOCK_ID';
+    shallowMount(ChannelCard, {
+      propsData: {
+        id: CHANNEL_ID,
+      },
+      stubs: ['router-link'],
+    });
+
+    expect(api.getChannelDetails).toBeCalledWith(CHANNEL_ID);
+  });
+
+  it('updates videos count and subscribers count after getChannelDetails request', (done) => {
+    const wrapper = shallowMount(ChannelCard, {
+      propsData: {
+        id: 'id',
+        title: 'title',
+        channel: 'String',
+        thumbnail: 'url',
+        description: 'description',
+        publishedAt: '3 years ago',
+      },
+      stubs: ['router-link'],
     });
 
     expect(wrapper.vm.subscribeCount).toEqual(0);
@@ -74,15 +89,16 @@ describe('ChannelCard', () => {
     wrapper.vm.$nextTick(() => {
       expect(wrapper.vm.subscribeCount).toEqual(1080000);
       expect(wrapper.vm.videosCount).toEqual(784);
+      done();
     });
   });
 
   it('does not update videos count and subscribers count after getChannelDetails request: fail scenario', () => {
-    api.getChannelDetails.mockImplementationOnce(() => {
-      return Promise.reject(new Error());
-    });
+    api.getChannelDetails.mockImplementationOnce(() => Promise.reject(new Error()));
 
-    const wrapper = shallowMount(ChannelCard);
+    const wrapper = shallowMount(ChannelCard, {
+      stubs: ['router-link'],
+    });
     expect(wrapper.vm.subscribeCount).toEqual(0);
     expect(wrapper.vm.videosCount).toEqual(0);
 

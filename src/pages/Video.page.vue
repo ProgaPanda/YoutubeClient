@@ -183,7 +183,7 @@ export default {
   computed: {
     reactionsRatio() {
       const { likes, dislikes } = this.reactions;
-      return (Number(likes) / (Number(likes) + Number(dislikes) * 4)) * 100;
+      return (Number(likes) / (Number(likes) + Number(dislikes))) * 100;
     },
   },
   filters: {

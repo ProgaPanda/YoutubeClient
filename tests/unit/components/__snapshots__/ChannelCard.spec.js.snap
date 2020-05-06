@@ -1,41 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ChannelCard renders correctly 1`] = `
-<div
-  class="channel-card"
+<router-link-stub
+  channel="String"
+  publishedat="3 years ago"
+  to="[object Object]"
 >
   <div
-    class="channel-card__thumbnail"
+    class="channel-card"
   >
-    <img
-      alt="video-thumbnail"
-    />
-  </div>
-   
-  <div
-    class="channel-card__details"
-  >
-    <h4
-      class="channel-card__details__title"
+    <div
+      class="channel-card__thumbnail"
     >
-      
-    </h4>
+      <img
+        alt="channel-thumbnail"
+        src="url"
+      />
+    </div>
      
-    <p
-      class="channel-card__details__sub-count"
+    <div
+      class="channel-card__details"
     >
-      
-      0 subscribers • 
-      <span>
-        0 videos
-      </span>
-    </p>
-     
-    <p
-      class="channel-card__details__description"
-    >
-      
-    </p>
+      <h4
+        class="channel-card__details__title"
+      >
+        title
+      </h4>
+       
+      <p
+        class="channel-card__details__sub-count"
+      >
+        
+        0 subscribers • 
+        <span>
+          0 videos
+        </span>
+      </p>
+       
+      <p
+        class="channel-card__details__description"
+      >
+        description
+      </p>
+    </div>
   </div>
-</div>
+</router-link-stub>
 `;

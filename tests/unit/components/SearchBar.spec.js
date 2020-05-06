@@ -19,6 +19,6 @@ describe('SearchBar', () => {
     });
     wrapper.setData({ searchParam: 'spongebob' });
     wrapper.vm.pushSearch();
-    expect($router.push).toBeCalledWith({ path: 'search', query: { query: 'spongebob' } });
+    expect($router.push).toBeCalledWith({ path: '/search', query: { query: 'spongebob' } });
   });
 });

@@ -1,37 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VideoCard renders correctly 1`] = `
-<div
-  class="video-card"
+<router-link-stub
+  to="[object Object]"
 >
   <div
-    class="video-card__thumbnail"
+    class="video-card"
   >
-    <img
-      alt="video-thumbnail"
-    />
-  </div>
-   
-  <div
-    class="video-card__details"
-  >
-    <h4
-      class="video-card__details__title"
+    <div
+      class="video-card__thumbnail"
     >
-      
-    </h4>
+      <img
+        alt="video-thumbnail"
+      />
+    </div>
      
-    <p
-      class="video-card__details__meta"
+    <div
+      class="video-card__details"
     >
-       • 
-    </p>
-     
-    <p
-      class="video-card__details__description"
-    >
+      <h4
+        class="video-card__details__title"
+      >
+        
+      </h4>
+       
+      <p
+        class="video-card__details__meta"
+      >
+        
+         
+        <!---->
+         
       
-    </p>
+      </p>
+       
+      <p
+        class="video-card__details__description"
+      >
+        
+      </p>
+    </div>
   </div>
-</div>
+</router-link-stub>
 `;
