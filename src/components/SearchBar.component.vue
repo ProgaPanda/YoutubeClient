@@ -50,11 +50,10 @@ export default {
   padding-left: 2em;
 
   &__input {
-    flex-grow: 1;
+    width: 100%;
     height: 3em;
     border: 0;
     padding: 0.75em;
-    border-right: 0;
     color: $color-primary;
     background: $color-accent;
 
