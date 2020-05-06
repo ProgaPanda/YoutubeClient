@@ -84,21 +84,16 @@ export default {
   beforeRouteUpdate(to, from, next) {
     const searchParam = getSearchParam(to);
     const filterOptions = mapToFilterOptions(this.filters);
-    if (searchParam) {
-      this.search(searchParam, filterOptions);
-    } else {
-      this.resetData();
-    }
+    this.resetData();
+    this.search(searchParam, filterOptions);
+
     next();
   },
 
   mounted() {
     const searchParam = getSearchParam(this.$route);
-    if (searchParam) {
-      this.search(searchParam);
-    } else {
-      this.resetData();
-    }
+    this.resetData();
+    this.search(searchParam);
   },
 
   components: {
@@ -187,7 +182,7 @@ export default {
       };
 
       // Make sure filter value is different to prevent duplicate fetches
-      if (filterObject.value !== currentFilters[filterObject.type] && searchParam) {
+      if (filterObject.value !== currentFilters[filterObject.type]) {
         this.isFilterActive = false;
         this.nextPageToken = null;
         const filterOptions = mapToFilterOptions(this.filters);
