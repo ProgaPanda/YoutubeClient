@@ -70,7 +70,7 @@
 
 <script>
 import MediaCard from '@/components/MediaCard.component.vue';
-import FilterLayout from '@/layout/FilterLayout.component.vue';
+import FilterLayout from '@/layout/Filter.layout.vue';
 import FilterItemDesktop from '@/components/FilterItem.desktop.component.vue';
 import FilterItemMobile from '@/components/FilterItem.mobile.component.vue';
 import api from '@/shared/services/api/api.service';
